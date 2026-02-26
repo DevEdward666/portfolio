@@ -88,7 +88,7 @@ export default function Navbar() {
               style={{ background: 'linear-gradient(135deg, #4F8EF7, #6A7FD0)' }}
               aria-label="Open contact section"
             >
-              <span>Let's Talk</span>
+              <span>Let&#39;s Talk</span>
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -159,7 +159,7 @@ export default function Navbar() {
               className="w-full py-3 rounded-xl text-white font-medium text-sm"
               style={{ background: 'linear-gradient(135deg, #4F8EF7, #6A7FD0)' }}
             >
-              Let's Talk
+              Let&#39;s Talk
             </button>
           </motion.li>
         </ul>

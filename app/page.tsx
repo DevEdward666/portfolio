@@ -24,12 +24,21 @@ async function getData() {
 export default async function HomePage() {
   const { user, education, certifications, experiences, projects } = await getData()
 
+  // Convert Date fields to strings for ExperienceSection
+  const experiencesForSection = experiences.map(exp => ({
+    ...exp,
+    startDate: exp.startDate?.toISOString(),
+    endDate: exp.endDate ? exp.endDate.toISOString() : null,
+    createdAt: exp.createdAt.toISOString(),
+    updatedAt: exp.updatedAt.toISOString(),
+  }));
+
   return (
     <main className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
       <HeroSection user={user} experiences={experiences} projects={projects} />
       <BackgroundSection education={education} certifications={certifications} />
-      <ExperienceSection experiences={experiences} />
+      <ExperienceSection experiences={experiencesForSection} />
       <ProjectsSection projects={projects} />
       <ContactSection />
       <Footer user={user} />

@@ -67,7 +67,7 @@ export default function ContactSection() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            <p className="section-label mb-3">Let's Connect</p>
+            <p className="section-label mb-3">Let&#39;s Connect</p>
             <h2
               className="font-display font-bold text-text-primary mb-6"
               style={{
@@ -80,7 +80,7 @@ export default function ContactSection() {
               <span className="gradient-text-blue">in mind?</span>
             </h2>
             <p className="text-text-secondary leading-relaxed mb-10 text-[0.95rem]">
-              I'm always open to discussing new opportunities, creative projects, or how we can build something great together. Drop me a message — I typically reply within 24 hours.
+              I&#39;m always open to discussing new opportunities, creative projects, or how we can build something great together. Drop me a message — I typically reply within 24 hours.
             </p>
 
             {/* Contact info */}
@@ -319,7 +319,7 @@ function SuccessState({ onReset }: { onReset: () => void }) {
         Message Sent!
       </h3>
       <p className="text-text-secondary text-sm mb-8">
-        Thanks for reaching out. I'll get back to you within 24 hours.
+        Thanks for reaching out. I&#39;ll get back to you within 24 hours.
       </p>
       <button
         onClick={onReset}
