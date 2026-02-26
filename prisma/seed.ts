@@ -43,7 +43,7 @@ async function main() {
         current: false,
         description: 'Focused on software engineering, mobile and web development, and database management systems.',
         gpa: null,
-        order: 0,
+        order: 1,
       },
       {
         institution: 'AMA Computer Learning Center - Davao City',
@@ -112,6 +112,23 @@ async function main() {
   // Experience
   await prisma.experience.createMany({
     data: [
+        {
+        company: 'Netzon Technologies',
+        role: 'Mid Software Developer',
+        startDate: new Date('2025-08-29'), 
+        endDate: null, // Currently working here
+        current: true,
+        description:
+          'Netzon Technologies is a dynamic software development company that specializes in creating innovative and customized solutions for clients across various industries. As a Mid Software Developer at Netzon Technologies, I have been responsible for designing, developing, and maintaining web applications using a range of technologies including Angular, React, Ionic, .NET Core, and PostgreSQL. I have collaborated closely with cross-functional teams to gather requirements, implement features, and ensure the delivery of high-quality software products that meet client needs and exceed expectations.',
+        achievements: [
+          'Developed user-friendly and responsive interfaces using React, Angular and Ionic, enhancing user experience and engagement',
+          'Built scalable and efficient back-end systems with .NET Core, ensuring optimal performance and security',
+          'Designed and integrated third-party REST APIs to extend platform capabilities',
+          "Collaborated with cross-functional teams to gather requirements, implement features, and deliver high-quality software products that meet client needs and exceed expectations",
+        ],
+        techStack: ['React', 'Angular', 'Ionic', '.NET Core', 'PostgreSQL', 'TypeScript', 'REST API'],
+        order: 0,
+      },
        {
         company: 'Silicate PTY LTD',
         role: 'Mid Software Developer',
@@ -127,7 +144,7 @@ async function main() {
           "Collaborated with cross-functional teams to gather requirements, implement features, and deliver high-quality software products that meet client needs and exceed expectations",
         ],
         techStack: ['Angular', '.NET EF Core', 'PostgreSQL', 'TypeScript', 'REST API'],
-        order: 3,
+        order: 1,
       },
         {
         company: 'Netzon Technologies',
@@ -161,7 +178,7 @@ async function main() {
           "Collaborated with cross-functional teams to gather requirements, implement features, and deliver high-quality software products that meet client needs and exceed expectations",
         ],
         techStack: ['React', 'Angular', 'Ionic', '.NET Core', 'PostgreSQL', 'TypeScript', 'REST API'],
-        order: 1,
+        order: 3,
       },
       {
         company: 'TUO IT Solutions',
@@ -177,7 +194,7 @@ async function main() {
           'Designed and integrated third-party REST APIs to extend platform capabilities',
         ],
         techStack: ['React', 'Java', '.NET Core', 'MySQL', 'JavaScript', 'REST API'],
-        order: 0,
+        order: 4,
       },
     ],
   })
@@ -196,7 +213,7 @@ async function main() {
         liveUrl: "https://restie-hardware-dev.vercel.app/home/main",    // 🔁 Add if deployed
         featured: true,
         tags: ['E-Commerce', 'Mobile', 'POS', 'Full Stack'],
-        order: 0,
+        order: 2,
       },
       {
         name: 'Sunny Side up Work + Study',
@@ -222,7 +239,7 @@ async function main() {
         liveUrl: "https://re-cash-3nit.vercel.app/login",    // 🔁 Add if deployed
         featured: true,
         tags: ['Full Stack', 'Loan Management', 'Web App'],
-        order: 2,
+        order: 0,
       },
       // 🔁 Add more projects below as needed
     ],

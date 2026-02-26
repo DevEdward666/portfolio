@@ -53,14 +53,9 @@ export default function Navbar() {
             className="group flex items-center gap-2.5"
             aria-label="Go to top"
           >
-            <div className="relative w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, #4F8EF7, #9B7FD4)' }}
-            >
-              <span className="font-display font-bold text-sm text-white">E</span>
+            <div className="w-48 h-10 rounded-xl overflow-hidden shadow-lg">
+              <img src="/banner-900x200.png" alt="Siklab.Tech" className="object-cover w-full h-full" />
             </div>
-            <span className="font-display font-semibold text-text-primary text-sm tracking-tight">
-              edward<span className="text-accent-blue">.</span>dev
-            </span>
           </button>
 
           {/* Desktop Nav */}
