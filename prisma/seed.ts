@@ -61,7 +61,52 @@ async function main() {
 
   // Certifications — 🔁 Add any real certifications you hold, or leave empty
   await prisma.certification.createMany({
-    data: [],
+    
+
+    data: [
+      {
+        name: 'Microsoft Certified Technology Specialist: Java',
+        issuer: 'Microsoft',
+        year: 2018,
+        order: 5,
+        credentialUrl: 'https://www.credly.com/badges/20716f8c-7f09-4637-8beb-a95ce753bcce', // 🔁 Replace with your real credential ID
+      },
+            {
+        name: 'Microsoft Technology Associate: Networking Fundamentals (MTA)',
+        issuer: 'Microsoft',
+        year: 2017,
+        order: 1,
+        credentialUrl: 'https://www.credly.com/badges/16658dce-9de1-4259-a5d3-09d4fd3afab5', // 🔁 Replace with your real credential ID
+      },
+          {
+        name: 'Microsoft Technology Associate: Security Fundamentals (MTA)',
+        issuer: 'Microsoft',
+        year: 2018,
+        order: 3,
+        credentialUrl: 'https://www.credly.com/badges/4979469f-a863-4c52-b42a-d21dd2376059', // 🔁 Replace with your real credential ID
+      },
+       {
+        name: 'Microsoft Technology Associate: Database Administration Fundamentals (MTA)',
+        issuer: 'Microsoft',
+        year: 2017,
+        order: 2,
+        credentialUrl: 'https://www.credly.com/badges/6fe3f598-82aa-4115-9a84-20ce96cb56c1', // 🔁 Replace with your real credential ID
+      },
+      {
+        name: 'Computer System Servicing NCII',
+        issuer: 'TESDA: Technical Education and Skills Development Authority',
+        year: 2017,
+        order: 4,
+        credentialUrl: '', // 🔁 Replace with your real credential ID
+      },
+      {
+        name: 'Programming NCIV',
+        issuer: 'AMA Computer Learning Center Thru TESDA: Technical Education and Skills Development Authority',
+        year: 2014,
+        order: 0,
+        credentialUrl: '', // 🔁 Replace with your real credential ID
+      },
+    ],
   })
 
   // Experience
