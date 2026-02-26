@@ -1,0 +1,109 @@
+// This is your Prisma schema file
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  name        String
+  title       String
+  bio         String   @db.Text
+  email       String   @unique
+  location    String?
+  avatarUrl   String?
+  resumeUrl   String?
+  githubUrl   String?
+  linkedinUrl String?
+  twitterUrl  String?
+  websiteUrl  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  institution String
+  degree      String
+  field       String
+  startYear   Int
+  endYear     Int?
+  current     Boolean  @default(false)
+  description String?  @db.Text
+  gpa         String?
+  logoUrl     String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("education")
+}
+
+model Certification {
+  id            String   @id @default(cuid())
+  name          String
+  issuer        String
+  year          Int
+  credentialUrl String?
+  logoUrl       String?
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  @@map("certifications")
+}
+
+model Experience {
+  id           String   @id @default(cuid())
+  company      String
+  role         String
+  startDate    DateTime
+  endDate      DateTime?
+  current      Boolean  @default(false)
+  description  String   @db.Text
+  achievements String[]
+  techStack    String[]
+  logoUrl      String?
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("experiences")
+}
+
+model Project {
+  id              String   @id @default(cuid())
+  name            String
+  description     String
+  longDescription String?  @db.Text
+  techStack       String[]
+  githubUrl       String?
+  liveUrl         String?
+  imageUrl        String?
+  featured        Boolean  @default(false)
+  tags            String[]
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("projects")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("contact_messages")
+}
