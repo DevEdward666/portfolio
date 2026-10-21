@@ -58,9 +58,9 @@ function ExperienceRow({
 
   return (
     <article className="group relative">
-      {/* Red line sweeps along the row on hover */}
+      {/* Accent line sweeps along the row on hover */}
       <span
-        className="absolute inset-x-0 -bottom-px z-10 h-[2px] origin-left scale-x-0 bg-rosso transition-transform duration-500 group-hover:scale-x-100"
+        className="absolute inset-x-0 -bottom-px z-10 h-[2px] origin-left scale-x-0 bg-accent transition-transform duration-500 group-hover:scale-x-100"
         aria-hidden="true"
       />
       <button
@@ -76,7 +76,7 @@ function ExperienceRow({
               {formatDateRange(exp.startDate, exp.endDate, exp.current)}
             </p>
             {exp.current && (
-              <span className="inline-flex items-center gap-2 bg-rosso px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
+              <span className="inline-flex items-center gap-2 bg-accent px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
                 Current
               </span>
             )}
@@ -84,11 +84,11 @@ function ExperienceRow({
           <h3 className="heading-md mt-3 transition-transform duration-300 group-hover:translate-x-2" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.25rem)' }}>
             {exp.role}
           </h3>
-          <p className="mt-2 text-base font-semibold text-rosso">{exp.company}</p>
+          <p className="mt-2 text-base font-semibold text-accent-bright">{exp.company}</p>
         </div>
 
         <span
-          className="relative mt-2 flex h-11 w-11 shrink-0 items-center justify-center border border-white/40 transition-colors group-hover:border-rosso"
+          className="relative mt-2 flex h-11 w-11 shrink-0 items-center justify-center border border-white/40 transition-colors group-hover:border-accent"
           aria-hidden="true"
         >
           <span className="absolute h-[2px] w-4 bg-white" />
@@ -117,7 +117,7 @@ function ExperienceRow({
               <ul className="space-y-3" role="list">
                 {exp.achievements.map((achievement, i) => (
                   <li key={i} className="flex items-start gap-4 text-base text-white/75">
-                    <span className="mt-[0.7em] h-[2px] w-4 shrink-0 bg-rosso" aria-hidden="true" />
+                    <span className="mt-[0.7em] h-[2px] w-4 shrink-0 bg-accent" aria-hidden="true" />
                     {achievement}
                   </li>
                 ))}

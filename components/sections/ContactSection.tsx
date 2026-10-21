@@ -84,7 +84,7 @@ export default function ContactSection() {
                   <dt className="text-xs font-bold uppercase tracking-caps text-mute">{item.label}</dt>
                   <dd className="text-base font-semibold">
                     {item.href ? (
-                      <a href={item.href} className="break-all transition-colors hover:text-rosso">
+                      <a href={item.href} className="break-all transition-colors hover:text-accent">
                         {item.value}
                       </a>
                     ) : (
@@ -142,19 +142,19 @@ export default function ContactSection() {
                     rows={5}
                     placeholder="Tell me about your project..."
                     className="field resize-none placeholder:text-mute"
-                    style={errors.message ? { borderBottomColor: '#DA291C' } : undefined}
+                    style={errors.message ? { borderBottomColor: '#C8261B' } : undefined}
                     {...register('message')}
                     aria-describedby={errors.message ? 'message-error' : undefined}
                   />
                   {errors.message && (
-                    <p id="message-error" className="text-sm font-semibold text-rosso" role="alert">
+                    <p id="message-error" className="text-sm font-semibold text-error" role="alert">
                       {errors.message.message}
                     </p>
                   )}
                 </div>
 
                 {status === 'error' && (
-                  <p className="border-l-4 border-rosso bg-rosso/10 px-4 py-3 text-sm font-semibold" role="alert">
+                  <p className="border-l-4 border-error bg-error/10 px-4 py-3 text-sm font-semibold" role="alert">
                     {errorMsg}
                   </p>
                 )}
@@ -162,7 +162,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="btn btn-red-on-light w-full disabled:cursor-not-allowed disabled:opacity-50"
+                  className="btn btn-primary-on-light w-full disabled:cursor-not-allowed disabled:opacity-50"
                   aria-label={status === 'loading' ? 'Sending message...' : 'Send message'}
                 >
                   {status === 'loading' ? (
@@ -208,12 +208,12 @@ function FormField({
         type={type}
         placeholder={placeholder}
         className="field placeholder:text-mute"
-        style={error ? { borderBottomColor: '#DA291C' } : undefined}
+        style={error ? { borderBottomColor: '#C8261B' } : undefined}
         {...registration}
         aria-describedby={error ? `${id}-error` : undefined}
       />
       {error && (
-        <p id={`${id}-error`} className="text-sm font-semibold text-rosso" role="alert">
+        <p id={`${id}-error`} className="text-sm font-semibold text-error" role="alert">
           {error}
         </p>
       )}
@@ -223,7 +223,7 @@ function FormField({
 
 function SuccessState({ onReset }: { onReset: () => void }) {
   return (
-    <div className="border-t-[3px] border-rosso bg-paper p-10 md:p-12" role="status">
+    <div className="border-t-[3px] border-accent bg-paper p-10 md:p-12" role="status">
       <h3 className="heading-md mb-3">Message Sent!</h3>
       <p className="mb-8 text-base text-mute">
         Thanks for reaching out. I&#39;ll get back to you within 24 hours.

@@ -57,8 +57,8 @@ export default function BackgroundSection({ education, certifications }: Backgro
 function EducationItem({ edu }: { edu: Education }) {
   return (
     <article>
-      <div className="rule-grow h-[3px] bg-rosso" aria-hidden="true" />
-      <p className="mt-6 font-display text-sm font-bold uppercase tracking-caps text-rosso">
+      <div className="rule-grow h-[3px] bg-accent" aria-hidden="true" />
+      <p className="mt-6 font-display text-sm font-bold uppercase tracking-caps text-accent">
         {formatYearRange(edu.startYear, edu.endYear, edu.current)}
       </p>
 
@@ -81,7 +81,7 @@ function CertificationRow({ cert }: { cert: Certification }) {
   const content = (
     <div className="group relative flex items-center justify-between gap-6 py-5 md:py-6">
       <span
-        className="absolute left-0 top-1/2 h-[3px] w-0 -translate-y-1/2 bg-rosso transition-all duration-300 group-hover:w-5"
+        className="absolute left-0 top-1/2 h-[3px] w-0 -translate-y-1/2 bg-accent transition-all duration-300 group-hover:w-5"
         aria-hidden="true"
       />
       <div className="min-w-0 transition-transform duration-300 group-hover:translate-x-9">
@@ -92,7 +92,7 @@ function CertificationRow({ cert }: { cert: Certification }) {
       </div>
       {cert.credentialUrl && (
         <span
-          className="flex h-10 w-10 shrink-0 items-center justify-center border border-ink transition-colors group-hover:border-rosso group-hover:bg-rosso group-hover:text-white"
+          className="flex h-10 w-10 shrink-0 items-center justify-center border border-ink transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-white"
           aria-hidden="true"
         >
           <svg width="14" height="14" viewBox="0 0 12 12" fill="none">

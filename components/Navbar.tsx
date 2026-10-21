@@ -76,7 +76,7 @@ export default function Navbar() {
                   aria-label={`Navigate to ${item.label} section`}
                 >
                   {item.label}
-                  <span className="absolute inset-x-0 -bottom-0.5 h-[3px] origin-left scale-x-0 bg-rosso transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="absolute inset-x-0 -bottom-0.5 h-[3px] origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100" />
                 </button>
               </li>
             ))}
@@ -89,7 +89,7 @@ export default function Navbar() {
                 e.preventDefault()
                 handleNav('#contact')
               }}
-              className="btn btn-red hidden !min-h-[44px] !px-6 md:inline-flex"
+              className="btn btn-primary hidden !min-h-[44px] !px-6 md:inline-flex"
               aria-label="Open contact section"
             >
               Let&#39;s Talk
@@ -126,7 +126,7 @@ export default function Navbar() {
 
         {/* Scroll progress, like a rev counter across the top of the page */}
         <motion.div
-          className="absolute inset-x-0 -bottom-px h-[2px] origin-left bg-rosso"
+          className="absolute inset-x-0 -bottom-px h-[2px] origin-left bg-accent"
           style={{ scaleX: progress }}
           aria-hidden="true"
         />
@@ -151,14 +151,14 @@ export default function Navbar() {
                 tabIndex={mobileOpen ? 0 : -1}
               >
                 {item.label}
-                <span className="h-[3px] w-6 bg-rosso" aria-hidden="true" />
+                <span className="h-[3px] w-6 bg-accent" aria-hidden="true" />
               </button>
             </li>
           ))}
           <li className="pt-8">
             <button
               onClick={() => handleNav('#contact')}
-              className="btn btn-red w-full"
+              className="btn btn-primary w-full"
               tabIndex={mobileOpen ? 0 : -1}
             >
               Let&#39;s Talk

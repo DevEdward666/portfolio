@@ -18,7 +18,7 @@ export function LogoMark({ className }: { className?: string }) {
         strokeWidth="2"
         strokeLinejoin="round"
       />
-      <path d="M4 4h56v10H4z" fill="#DA291C" />
+      <path d="M4 4h56v10H4z" fill="#1E5EFF" />
       <g fill="#FFFFFF">
         <path d="M14 24h3.5v28H14zM14 24h10v3.5H14zM14 36.25h8v3.5h-8zM14 48.5h10V52H14z" />
         <path d="M33.5 24H37v22.5h-3.5zM29 24h8v3.5h-8zM27 48.5h10V52H27zM27 44h3.5v8H27z" />

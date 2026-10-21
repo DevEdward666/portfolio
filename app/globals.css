@@ -23,12 +23,12 @@
   }
 
   ::selection {
-    background: #DA291C;
+    background: #1E5EFF;
     color: #fff;
   }
 
   :focus-visible {
-    outline: 2px solid #DA291C;
+    outline: 2px solid #1E5EFF;
     outline-offset: 3px;
   }
 
@@ -45,7 +45,7 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #DA291C;
+    background: #1E5EFF;
   }
 }
 
@@ -78,7 +78,7 @@
 
   .eyebrow::before {
     content: '';
-    @apply block h-[3px] w-8 bg-rosso;
+    @apply block h-[3px] w-8 bg-accent;
   }
 
   .heading-xl {
@@ -129,19 +129,19 @@
     display: none;
   }
 
-  .btn-red {
-    @apply bg-rosso text-white hover:text-ink;
+  .btn-primary {
+    @apply bg-accent text-white hover:text-ink;
   }
 
-  .btn-red::before {
+  .btn-primary::before {
     @apply bg-white;
   }
 
-  .btn-red-on-light {
-    @apply bg-rosso text-white;
+  .btn-primary-on-light {
+    @apply bg-accent text-white;
   }
 
-  .btn-red-on-light::before {
+  .btn-primary-on-light::before {
     @apply bg-ink;
   }
 
@@ -161,10 +161,10 @@
     @apply bg-ink;
   }
 
-  /* Text link with red underline that grows */
+  /* Text link with an accent underline that shrinks on hover */
   .link-line {
     @apply relative inline-block text-[13px] font-bold uppercase tracking-caps;
-    background-image: linear-gradient(#DA291C, #DA291C);
+    background-image: linear-gradient(#1E5EFF, #1E5EFF);
     background-repeat: no-repeat;
     background-position: 0 100%;
     background-size: 100% 2px;
@@ -189,14 +189,14 @@
   }
 
   .field:focus {
-    border-bottom-color: #DA291C;
+    border-bottom-color: #1E5EFF;
   }
 }
 
 @layer utilities {
   .hero-glow {
     background:
-      radial-gradient(ellipse 70% 60% at 85% 0%, rgba(218, 41, 28, 0.35), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 85% 0%, rgba(30, 94, 255, 0.35), transparent 60%),
       linear-gradient(180deg, #0A0A0A 0%, #151515 100%);
   }
 
@@ -268,7 +268,7 @@
   bottom: 0.06em;
   width: 0.09em;
   height: 0.8em;
-  background: #DA291C;
+  background: #1E5EFF;
   animation: blink 1s steps(1) infinite;
 }
 
@@ -280,7 +280,7 @@
 .hero-spotlight {
   opacity: 0;
   transition: opacity 0.4s ease;
-  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), rgba(218, 41, 28, 0.22), transparent 65%);
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), rgba(30, 94, 255, 0.22), transparent 65%);
 }
 
 .group\/hero:hover .hero-spotlight {
@@ -309,8 +309,8 @@
   width: 180px;
   height: 2px;
   transform-origin: left center;
-  background: linear-gradient(90deg, transparent, #DA291C 70%, #fff);
-  box-shadow: 0 0 12px rgba(218, 41, 28, 0.8);
+  background: linear-gradient(90deg, transparent, #1E5EFF 60%, #9FD8FF 90%, #fff);
+  box-shadow: 0 0 14px rgba(91, 140, 255, 0.85);
   opacity: 0;
   animation: streak 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -330,8 +330,8 @@
   transition: transform 0.75s cubic-bezier(0.8, 0, 0.2, 1);
 }
 
-.intro-panel-red {
-  background: #DA291C;
+.intro-panel-accent {
+  background: #1E5EFF;
   transition-delay: 0.12s;
 }
 
@@ -408,7 +408,7 @@
   transform: none;
 }
 
-/* Red rules and eyebrow bars draw in once revealed */
+/* Accent rules and eyebrow bars draw in once revealed */
 .rule-grow,
 .reveal .eyebrow::before {
   transform: scaleX(0);

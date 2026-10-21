@@ -10,7 +10,7 @@ const LIFT_MS = 800
 
 /**
  * First-visit intro: the logo and a rev-counter style bar fill up, then the
- * black and red curtains lift to reveal the hero. Shown once per browser session.
+ * black and blue curtains lift to reveal the hero. Shown once per browser session.
  */
 export default function IntroLoader() {
   const [phase, setPhase] = useState<'revving' | 'lifting' | 'gone'>('revving')
@@ -77,13 +77,13 @@ export default function IntroLoader() {
       onClick={phase === 'revving' ? lift : undefined}
       aria-hidden="true"
     >
-      <div className="intro-panel intro-panel-red" />
+      <div className="intro-panel intro-panel-accent" />
       <div className="intro-panel intro-panel-black">
         <div className="intro-content">
           <LogoMark className="intro-logo h-24 w-auto md:h-28" />
           <div className="mt-10 w-56 md:w-72">
             <div className="h-[3px] w-full bg-white/15">
-              <div className="h-full origin-left bg-rosso" style={{ transform: `scaleX(${progress / 100})` }} />
+              <div className="h-full origin-left bg-accent" style={{ transform: `scaleX(${progress / 100})` }} />
             </div>
             <div className="mt-3 flex justify-between text-[11px] font-bold uppercase tracking-caps text-white/50">
               <span>Loading</span>

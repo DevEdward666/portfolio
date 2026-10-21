@@ -18,10 +18,13 @@ const config: Config = {
           DEFAULT: '#FFFFFF',
           soft: '#F4F4F4',
         },
-        rosso: {
-          DEFAULT: '#DA291C',
-          deep: '#B01E14',
+        // Cobalt for light surfaces and buttons; the brighter tone keeps text legible on black
+        accent: {
+          DEFAULT: '#1E5EFF',
+          deep: '#1446D6',
+          bright: '#5B8CFF',
         },
+        error: '#C8261B',
         line: {
           DEFAULT: '#D8D8D8',
           dark: '#2E2E2E',

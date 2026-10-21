@@ -22,7 +22,7 @@ export default function Footer({ user }: FooterProps) {
   ]
 
   return (
-    <footer className="surface-dark border-t-[3px] border-rosso" role="contentinfo" aria-label="Footer">
+    <footer className="surface-dark border-t-[3px] border-accent" role="contentinfo" aria-label="Footer">
       <div className="page-width py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           {/* Brand */}
@@ -40,7 +40,7 @@ export default function Footer({ user }: FooterProps) {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-[13px] font-bold uppercase tracking-caps text-white transition-colors hover:text-rosso"
+                    className="text-[13px] font-bold uppercase tracking-caps text-white transition-colors hover:text-accent-bright"
                   >
                     {link.label}
                   </a>
@@ -57,7 +57,7 @@ export default function Footer({ user }: FooterProps) {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[13px] font-bold uppercase tracking-caps text-white transition-colors hover:text-rosso"
+                  className="text-[13px] font-bold uppercase tracking-caps text-white transition-colors hover:text-accent-bright"
                   aria-label={link.label}
                 >
                   {link.label}

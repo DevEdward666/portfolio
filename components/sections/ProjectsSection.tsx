@@ -50,7 +50,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
               className={cn(
                 '-mb-px border-b-[3px] pb-3 text-[13px] font-bold uppercase tracking-caps transition-colors',
                 filter === tag
-                  ? 'border-rosso text-ink'
+                  ? 'border-accent text-ink'
                   : 'border-transparent text-mute hover:text-ink'
               )}
               aria-pressed={filter === tag}
@@ -80,29 +80,29 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="hero-glow relative aspect-[4/3] overflow-hidden" aria-hidden="true">
         <div className="hero-stripe absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-110" />
         <span
-          className="absolute -bottom-6 left-4 select-none font-display font-extrabold leading-none text-white/10 transition-all duration-700 ease-out group-hover:-translate-y-3 group-hover:translate-x-2 group-hover:text-rosso/40"
+          className="absolute -bottom-6 left-4 select-none font-display font-extrabold leading-none text-white/10 transition-all duration-700 ease-out group-hover:-translate-y-3 group-hover:translate-x-2 group-hover:text-accent/40"
           style={{ fontSize: '11rem', fontStretch: '115%' }}
         >
           {project.name[0]}
         </span>
 
         {project.featured && (
-          <span className="absolute left-0 top-0 bg-rosso px-4 py-2 text-[11px] font-bold uppercase tracking-caps text-white">
+          <span className="absolute left-0 top-0 bg-accent px-4 py-2 text-[11px] font-bold uppercase tracking-caps text-white">
             Featured
           </span>
         )}
 
-        <span className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-rosso transition-transform duration-500 group-hover:scale-x-100" />
+        <span className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-accent transition-transform duration-500 group-hover:scale-x-100" />
       </div>
 
       <div className="flex flex-1 flex-col pt-6">
-        <h3 className="heading-md transition-colors duration-300 group-hover:text-rosso">{project.name}</h3>
+        <h3 className="heading-md transition-colors duration-300 group-hover:text-accent">{project.name}</h3>
         <p className="mt-3 flex-1 text-base leading-relaxed text-mute">{project.description}</p>
 
         {/* Tags */}
         <div className="mt-5 flex flex-wrap gap-2" role="list" aria-label="Project tags">
           {project.tags.map((tag) => (
-            <span key={tag} className="tag border-rosso text-rosso" role="listitem">
+            <span key={tag} className="tag border-accent text-accent" role="listitem">
               {tag}
             </span>
           ))}

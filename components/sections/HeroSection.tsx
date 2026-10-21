@@ -57,7 +57,7 @@ export default function HeroSection({ user, experiences = [], projects = [] }: H
 
   useEffect(() => onIntroDone(() => setReady(true)), [])
 
-  // Red spotlight that follows the pointer across the hero
+  // Blue spotlight that follows the pointer across the hero
   const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
     if (e.pointerType !== 'mouse' || !sectionRef.current) return
     const rect = sectionRef.current.getBoundingClientRect()
@@ -88,8 +88,8 @@ export default function HeroSection({ user, experiences = [], projects = [] }: H
       <div className="page-width relative z-10 flex flex-1 flex-col justify-center pb-14 pt-32">
         <p className="hero-rise flex items-center gap-3 text-xs font-bold uppercase tracking-caps text-white/80">
           <span className="relative flex h-2 w-2" aria-hidden="true">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rosso opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-rosso" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-bright opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-bright" />
           </span>
           Available for new projects
         </p>
@@ -112,7 +112,7 @@ export default function HeroSection({ user, experiences = [], projects = [] }: H
           })}
         </h1>
 
-        <div className="hero-rule mt-10 h-[4px] w-28 bg-rosso" aria-hidden="true" />
+        <div className="hero-rule mt-10 h-[4px] w-28 bg-accent" aria-hidden="true" />
 
         <p className="mt-8 font-display text-lg font-bold uppercase tracking-caps md:text-xl">
           <ScrambleText text={title} start={ready} delay={1.15} duration={900} />
@@ -129,7 +129,7 @@ export default function HeroSection({ user, experiences = [], projects = [] }: H
           className="hero-rise mt-12 flex flex-wrap items-center gap-4"
           style={{ animationDelay: '1.5s' }}
         >
-          <button onClick={() => scrollTo('#projects')} className="btn btn-red" aria-label="View my projects">
+          <button onClick={() => scrollTo('#projects')} className="btn btn-primary" aria-label="View my projects">
             View My Work
           </button>
           <button
@@ -146,7 +146,7 @@ export default function HeroSection({ user, experiences = [], projects = [] }: H
                 href={user.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 transition-colors hover:text-rosso"
+                className="text-white/70 transition-colors hover:text-accent-bright"
                 aria-label="GitHub profile"
               >
                 <GithubIcon />
@@ -157,7 +157,7 @@ export default function HeroSection({ user, experiences = [], projects = [] }: H
                 href={user.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 transition-colors hover:text-rosso"
+                className="text-white/70 transition-colors hover:text-accent-bright"
                 aria-label="LinkedIn profile"
               >
                 <LinkedinIcon />

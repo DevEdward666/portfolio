@@ -13,9 +13,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'inline-flex items-center justify-center gap-2 font-bold uppercase tracking-caps transition-colors duration-200'
 
     const variants = {
-      primary: 'bg-rosso text-white hover:bg-ink',
+      primary: 'bg-accent text-white hover:bg-ink',
       secondary: 'border border-ink text-ink hover:bg-ink hover:text-white',
-      ghost: 'text-ink hover:text-rosso',
+      ghost: 'text-ink hover:text-accent',
     }
 
     const sizes = {
