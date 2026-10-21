@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { contactSchema, type ContactSchema } from '@/lib/validations'
+import Reveal from '@/components/ui/Reveal'
+import ScrambleText from '@/components/ui/ScrambleText'
 
 export default function ContactSection() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -46,11 +48,19 @@ export default function ContactSection() {
         <div className="grid items-start gap-14 md:grid-cols-2 lg:gap-24">
           {/* Left column */}
           <div>
-            <p className="eyebrow">Let&#39;s Connect</p>
-            <h2 className="heading-lg mb-8">Have a project in mind?</h2>
-            <p className="mb-12 max-w-[52ch] text-base leading-relaxed text-mute">
-              I&#39;m always open to discussing new opportunities, creative projects, or how we can build something great together. Drop me a message — I typically reply within 24 hours.
-            </p>
+            <Reveal variant="fade">
+              <p className="eyebrow">
+                <ScrambleText text="Let's Connect" />
+              </p>
+            </Reveal>
+            <Reveal variant="mask" delay={0.1}>
+              <h2 className="heading-lg mb-8">Have a project in mind?</h2>
+            </Reveal>
+            <Reveal delay={0.25}>
+              <p className="mb-12 max-w-[52ch] text-base leading-relaxed text-mute">
+                I&#39;m always open to discussing new opportunities, creative projects, or how we can build something great together. Drop me a message — I typically reply within 24 hours.
+              </p>
+            </Reveal>
 
             <dl className="border-t border-ink">
               {[
@@ -87,7 +97,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right column — form */}
-          <div>
+          <Reveal delay={0.2}>
             {status === 'success' ? (
               <SuccessState onReset={() => setStatus('idle')} />
             ) : (
@@ -166,7 +176,7 @@ export default function ContactSection() {
                 </button>
               </form>
             )}
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

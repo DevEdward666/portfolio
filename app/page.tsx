@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import Navbar from '@/components/Navbar'
+import IntroLoader from '@/components/IntroLoader'
 import HeroSection from '@/components/sections/HeroSection'
 import BackgroundSection from '@/components/sections/BackgroundSection'
 import ExperienceSection from '@/components/sections/ExperienceSection'
@@ -35,6 +36,7 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen overflow-x-hidden">
+      <IntroLoader />
       <Navbar />
       <HeroSection user={user} experiences={experiences} projects={projects} />
       <BackgroundSection education={education} certifications={certifications} />

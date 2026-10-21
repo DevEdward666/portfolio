@@ -1,6 +1,10 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import { calculateYearsOfExperience, countUniqueCompanies } from '@/lib/utils'
+import { onIntroDone, prefersReducedMotion } from '@/lib/intro'
+import CountUp from '@/components/ui/CountUp'
+import ScrambleText from '@/components/ui/ScrambleText'
 
 interface Experience {
   startDate: string | Date
@@ -32,29 +36,54 @@ export default function HeroSection({ user, experiences = [], projects = [] }: H
     user?.bio ??
     'Crafting high-performance web applications with clean architecture and exceptional user experience.'
 
-  const [firstName, ...rest] = displayName.split(' ')
-  const lastNames = rest.join(' ')
+  // One word per line, typed in sequence, so a half-typed word never reflows the heading
+  const words = displayName.split(' ')
+  const totalChars = words.reduce((sum, word) => sum + word.length, 0)
 
   const yearsOfExperience = calculateYearsOfExperience(experiences)
   const companies = countUniqueCompanies(experiences)
   const projectsCount = projects.length
 
   const stats = [
-    { value: `${yearsOfExperience}+`, label: 'Years of Experience' },
-    { value: `${projectsCount}+`, label: 'Projects Shipped' },
-    { value: companies, label: 'Companies' },
+    { value: yearsOfExperience, suffix: '+', label: 'Years of Experience' },
+    { value: projectsCount, suffix: '+', label: 'Projects Shipped' },
+    { value: companies, suffix: '', label: 'Companies' },
   ]
+
+  const sectionRef = useRef<HTMLElement>(null)
+  const [ready, setReady] = useState(false)
+  const typed = useTypewriter(totalChars, ready)
+  const typing = typed < totalChars
+
+  useEffect(() => onIntroDone(() => setReady(true)), [])
+
+  // Red spotlight that follows the pointer across the hero
+  const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
+    if (e.pointerType !== 'mouse' || !sectionRef.current) return
+    const rect = sectionRef.current.getBoundingClientRect()
+    sectionRef.current.style.setProperty('--mx', `${e.clientX - rect.left}px`)
+    sectionRef.current.style.setProperty('--my', `${e.clientY - rect.top}px`)
+  }
 
   const scrollTo = (selector: string) =>
     document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
-      className="surface-dark hero-glow relative flex min-h-screen flex-col overflow-hidden"
+      data-ready={ready}
+      onPointerMove={handlePointerMove}
+      className="surface-dark hero-glow group/hero relative flex min-h-screen flex-col overflow-hidden"
       aria-label="Hero section"
     >
       <div className="hero-stripe pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="hero-spotlight pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <span className="hero-streak" style={{ left: '8%', animationDelay: '0.4s' }} />
+        <span className="hero-streak" style={{ left: '46%', animationDelay: '2.6s', animationDuration: '5.5s' }} />
+        <span className="hero-streak" style={{ left: '78%', animationDelay: '1.5s', animationDuration: '4.5s' }} />
+      </div>
 
       <div className="page-width relative z-10 flex flex-1 flex-col justify-center pb-14 pt-32">
         <p className="hero-rise flex items-center gap-3 text-xs font-bold uppercase tracking-caps text-white/80">
@@ -66,32 +95,39 @@ export default function HeroSection({ user, experiences = [], projects = [] }: H
         </p>
 
         <h1
-          className="hero-rise heading-xl mt-8"
-          style={{ animationDelay: '0.1s', fontSize: 'clamp(2.75rem, 8.6vw, 8rem)', lineHeight: 0.92 }}
+          className="heading-xl mt-8"
+          style={{ fontSize: 'clamp(2.75rem, 8.6vw, 8rem)', lineHeight: 0.92 }}
         >
-          <span className="block">{firstName}</span>
-          <span className="block">{lastNames}</span>
+          <span className="sr-only">{displayName}</span>
+          {words.map((word, i) => {
+            const before = words.slice(0, i).reduce((sum, w) => sum + w.length, 0)
+            const isLast = i === words.length - 1
+            const typedHere = Math.max(0, Math.min(word.length, typed - before))
+            const cursorHere = isLast ? typed >= before : typed >= before && typed < before + word.length
+            return (
+              <span key={i} className="block" aria-hidden="true">
+                <TypedLine text={word} typed={typedHere} cursor={cursorHere} typing={typing && ready} />
+              </span>
+            )
+          })}
         </h1>
 
         <div className="hero-rule mt-10 h-[4px] w-28 bg-rosso" aria-hidden="true" />
 
-        <p
-          className="hero-rise mt-8 font-display text-lg font-bold uppercase tracking-caps md:text-xl"
-          style={{ animationDelay: '0.3s' }}
-        >
-          {title}
+        <p className="mt-8 font-display text-lg font-bold uppercase tracking-caps md:text-xl">
+          <ScrambleText text={title} start={ready} delay={1.15} duration={900} />
         </p>
 
         <p
           className="hero-rise mt-6 max-w-[62ch] text-base leading-relaxed text-white/70 md:text-lg"
-          style={{ animationDelay: '0.4s' }}
+          style={{ animationDelay: '1.35s' }}
         >
           {bio}
         </p>
 
         <div
           className="hero-rise mt-12 flex flex-wrap items-center gap-4"
-          style={{ animationDelay: '0.5s' }}
+          style={{ animationDelay: '1.5s' }}
         >
           <button onClick={() => scrollTo('#projects')} className="btn btn-red" aria-label="View my projects">
             View My Work
@@ -132,7 +168,10 @@ export default function HeroSection({ user, experiences = [], projects = [] }: H
       </div>
 
       {/* Stats strip */}
-      <div className="relative z-10 border-t border-white/15 bg-black/40 backdrop-blur-sm">
+      <div
+        className="hero-rise relative z-10 border-t border-white/15 bg-black/40 backdrop-blur-sm"
+        style={{ animationDelay: '1.65s' }}
+      >
         <dl className="page-width grid grid-cols-3">
           {stats.map((stat, i) => (
             <div
@@ -143,13 +182,59 @@ export default function HeroSection({ user, experiences = [], projects = [] }: H
                 {stat.label}
               </dt>
               <dd className="font-display text-3xl font-extrabold md:text-5xl" style={{ fontStretch: '110%' }}>
-                {stat.value}
+                <CountUp value={stat.value} suffix={stat.suffix} start={ready} delay={1.75 + i * 0.15} />
               </dd>
             </div>
           ))}
         </dl>
       </div>
     </section>
+  )
+}
+
+/** Types `total` characters one at a time with a slightly human, uneven rhythm. */
+function useTypewriter(total: number, start: boolean) {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!start) return
+    if (prefersReducedMotion()) {
+      setCount(total)
+      return
+    }
+
+    let current = 0
+    let timeout = 0
+    const step = () => {
+      current += 1
+      setCount(current)
+      if (current < total) timeout = window.setTimeout(step, 38 + Math.random() * 55)
+    }
+    timeout = window.setTimeout(step, 350)
+    return () => clearTimeout(timeout)
+  }, [start, total])
+
+  return count
+}
+
+function TypedLine({
+  text,
+  typed,
+  cursor,
+  typing,
+}: {
+  text: string
+  typed: number
+  cursor: boolean
+  typing: boolean
+}) {
+  return (
+    <>
+      {text.slice(0, typed)}
+      {cursor && <span className={typing ? 'type-cursor is-typing' : 'type-cursor'} />}
+      {/* Untyped letters keep their space so the layout never jumps */}
+      <span className="invisible">{text.slice(typed)}</span>
+    </>
   )
 }
 

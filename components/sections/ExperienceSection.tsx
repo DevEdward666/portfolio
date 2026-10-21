@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { cn, formatDateRange } from '@/lib/utils'
 import type { Experience } from '@/types'
+import Reveal from '@/components/ui/Reveal'
+import ScrambleText from '@/components/ui/ScrambleText'
 
 interface ExperienceSectionProps {
   experiences: Experience[]
@@ -15,18 +17,26 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
     <section id="experience" className="surface-dark section-pad" aria-label="Work Experience">
       <div className="page-width">
         <header className="mb-16 md:mb-20">
-          <p className="eyebrow">Career</p>
-          <h2 className="heading-lg">Work Experience</h2>
+          <Reveal variant="fade">
+            <p className="eyebrow">
+              <ScrambleText text="Career" />
+            </p>
+          </Reveal>
+          <Reveal variant="mask" delay={0.1}>
+            <h2 className="heading-lg">Work Experience</h2>
+          </Reveal>
         </header>
 
         <ul className="border-t border-white" role="list">
-          {experiences.map((exp) => (
+          {experiences.map((exp, i) => (
             <li key={exp.id} className="border-b border-line-dark">
-              <ExperienceRow
-                exp={exp}
-                isExpanded={expandedId === exp.id}
-                onToggle={() => setExpandedId(expandedId === exp.id ? null : exp.id)}
-              />
+              <Reveal delay={i * 0.1}>
+                <ExperienceRow
+                  exp={exp}
+                  isExpanded={expandedId === exp.id}
+                  onToggle={() => setExpandedId(expandedId === exp.id ? null : exp.id)}
+                />
+              </Reveal>
             </li>
           ))}
         </ul>
@@ -47,10 +57,15 @@ function ExperienceRow({
   const panelId = `exp-${exp.id}`
 
   return (
-    <article>
+    <article className="group relative">
+      {/* Red line sweeps along the row on hover */}
+      <span
+        className="absolute inset-x-0 -bottom-px z-10 h-[2px] origin-left scale-x-0 bg-rosso transition-transform duration-500 group-hover:scale-x-100"
+        aria-hidden="true"
+      />
       <button
         onClick={onToggle}
-        className="group flex w-full items-start justify-between gap-6 py-8 text-left md:py-10"
+        className="flex w-full items-start justify-between gap-6 py-8 text-left md:py-10"
         aria-expanded={isExpanded}
         aria-controls={panelId}
         aria-label={`${exp.role} at ${exp.company}`}
@@ -66,7 +81,7 @@ function ExperienceRow({
               </span>
             )}
           </div>
-          <h3 className="heading-md mt-3 transition-colors group-hover:text-rosso" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.25rem)' }}>
+          <h3 className="heading-md mt-3 transition-transform duration-300 group-hover:translate-x-2" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.25rem)' }}>
             {exp.role}
           </h3>
           <p className="mt-2 text-base font-semibold text-rosso">{exp.company}</p>

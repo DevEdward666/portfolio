@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import Logo from '@/components/ui/Logo'
 
@@ -14,6 +15,8 @@ const navItems = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 })
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -120,6 +123,13 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
+
+        {/* Scroll progress, like a rev counter across the top of the page */}
+        <motion.div
+          className="absolute inset-x-0 -bottom-px h-[2px] origin-left bg-rosso"
+          style={{ scaleX: progress }}
+          aria-hidden="true"
+        />
       </header>
 
       {/* Mobile menu: full-screen panel */}

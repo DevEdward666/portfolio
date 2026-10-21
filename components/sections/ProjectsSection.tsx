@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import type { Project } from '@/types'
+import Reveal from '@/components/ui/Reveal'
+import ScrambleText from '@/components/ui/ScrambleText'
 
 interface ProjectsSectionProps {
   projects: Project[]
@@ -19,12 +21,20 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
       <div className="page-width">
         <header className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <p className="eyebrow">Portfolio</p>
-            <h2 className="heading-lg">Selected Projects</h2>
+            <Reveal variant="fade">
+              <p className="eyebrow">
+                <ScrambleText text="Portfolio" />
+              </p>
+            </Reveal>
+            <Reveal variant="mask" delay={0.1}>
+              <h2 className="heading-lg">Selected Projects</h2>
+            </Reveal>
           </div>
-          <p className="max-w-xs text-base text-mute">
-            {projects.length} projects shipped — from side hustles to production systems.
-          </p>
+          <Reveal variant="fade" delay={0.3}>
+            <p className="max-w-xs text-base text-mute">
+              {projects.length} projects shipped — from side hustles to production systems.
+            </p>
+          </Reveal>
         </header>
 
         {/* Filter tabs */}
@@ -50,9 +60,12 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+        {/* Keyed by filter so the cards deal in again whenever the filter changes */}
+        <div key={filter} className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((project, i) => (
+            <Reveal key={project.id} delay={i * 0.12} className="h-full">
+              <ProjectCard project={project} />
+            </Reveal>
           ))}
         </div>
       </div>
@@ -62,12 +75,12 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="flex h-full flex-col" aria-label={project.name}>
+    <article className="group flex h-full flex-col" aria-label={project.name}>
       {/* Visual panel */}
       <div className="hero-glow relative aspect-[4/3] overflow-hidden" aria-hidden="true">
-        <div className="hero-stripe absolute inset-0" />
+        <div className="hero-stripe absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-110" />
         <span
-          className="absolute -bottom-6 left-4 select-none font-display font-extrabold leading-none text-white/10"
+          className="absolute -bottom-6 left-4 select-none font-display font-extrabold leading-none text-white/10 transition-all duration-700 ease-out group-hover:-translate-y-3 group-hover:translate-x-2 group-hover:text-rosso/40"
           style={{ fontSize: '11rem', fontStretch: '115%' }}
         >
           {project.name[0]}
@@ -78,10 +91,12 @@ function ProjectCard({ project }: { project: Project }) {
             Featured
           </span>
         )}
+
+        <span className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-rosso transition-transform duration-500 group-hover:scale-x-100" />
       </div>
 
       <div className="flex flex-1 flex-col pt-6">
-        <h3 className="heading-md">{project.name}</h3>
+        <h3 className="heading-md transition-colors duration-300 group-hover:text-rosso">{project.name}</h3>
         <p className="mt-3 flex-1 text-base leading-relaxed text-mute">{project.description}</p>
 
         {/* Tags */}

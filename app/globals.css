@@ -105,25 +105,60 @@
     letter-spacing: 0.01em;
   }
 
-  /* Buttons */
+  /* Buttons — a fill sweeps across from the left on hover */
   .btn {
-    @apply inline-flex min-h-[52px] items-center justify-center gap-3 px-8 text-[13px] font-bold uppercase tracking-caps transition-colors duration-200;
+    @apply relative isolate inline-flex min-h-[52px] items-center justify-center gap-3 overflow-hidden px-8 text-[13px] font-bold uppercase tracking-caps transition-colors duration-300;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.7, 0, 0.2, 1);
+  }
+
+  .btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .btn:disabled::before {
+    display: none;
   }
 
   .btn-red {
-    @apply bg-rosso text-white hover:bg-white hover:text-ink;
+    @apply bg-rosso text-white hover:text-ink;
+  }
+
+  .btn-red::before {
+    @apply bg-white;
   }
 
   .btn-red-on-light {
-    @apply bg-rosso text-white hover:bg-ink hover:text-white;
+    @apply bg-rosso text-white;
+  }
+
+  .btn-red-on-light::before {
+    @apply bg-ink;
   }
 
   .btn-outline-light {
-    @apply border border-white text-white hover:bg-white hover:text-ink;
+    @apply border border-white text-white hover:text-ink;
+  }
+
+  .btn-outline-light::before {
+    @apply bg-white;
   }
 
   .btn-outline-dark {
-    @apply border border-ink text-ink hover:bg-ink hover:text-white;
+    @apply border border-ink text-ink hover:text-white;
+  }
+
+  .btn-outline-dark::before {
+    @apply bg-ink;
   }
 
   /* Text link with red underline that grows */
@@ -174,6 +209,8 @@
   }
 }
 
+/* ---------- Hero entrance (waits for the intro via [data-ready]) ---------- */
+
 @keyframes heroRise {
   from {
     opacity: 0;
@@ -194,13 +231,194 @@
   }
 }
 
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 .hero-rise {
+  opacity: 0;
+}
+
+[data-ready='true'] .hero-rise {
   animation: heroRise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 .hero-rule {
+  transform: scaleX(0);
   transform-origin: left;
-  animation: ruleGrow 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both;
+}
+
+[data-ready='true'] .hero-rule {
+  animation: ruleGrow 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 1s both;
+}
+
+/* Typing cursor: zero-width so it never pushes letters onto a new line */
+.type-cursor {
+  position: relative;
+  display: inline-block;
+  width: 0;
+}
+
+.type-cursor::after {
+  content: '';
+  position: absolute;
+  left: 0.05em;
+  bottom: 0.06em;
+  width: 0.09em;
+  height: 0.8em;
+  background: #DA291C;
+  animation: blink 1s steps(1) infinite;
+}
+
+.type-cursor.is-typing::after {
+  animation: none;
+}
+
+/* Pointer spotlight */
+.hero-spotlight {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), rgba(218, 41, 28, 0.22), transparent 65%);
+}
+
+.group\/hero:hover .hero-spotlight {
+  opacity: 1;
+}
+
+/* Light streaks that race along the diagonal stripes */
+@keyframes streak {
+  0% {
+    transform: rotate(-62deg) translateX(-30vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  60%,
+  100% {
+    transform: rotate(-62deg) translateX(140vh);
+    opacity: 0;
+  }
+}
+
+.hero-streak {
+  position: absolute;
+  bottom: 0;
+  width: 180px;
+  height: 2px;
+  transform-origin: left center;
+  background: linear-gradient(90deg, transparent, #DA291C 70%, #fff);
+  box-shadow: 0 0 12px rgba(218, 41, 28, 0.8);
+  opacity: 0;
+  animation: streak 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ---------- Intro curtain ---------- */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.intro-panel {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.75s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.intro-panel-red {
+  background: #DA291C;
+  transition-delay: 0.12s;
+}
+
+.intro-panel-black {
+  background: #0A0A0A;
+}
+
+.intro.is-lifting .intro-panel {
+  transform: translateY(-100%);
+}
+
+.intro-content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease, transform 0.6s ease;
+}
+
+.intro.is-lifting .intro-content {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+
+@keyframes logoIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.intro-logo {
+  animation: logoIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* ---------- Scroll reveals (toggled by <Reveal>) ---------- */
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.8s ease var(--reveal-delay, 0s),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0s);
+}
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 1s ease var(--reveal-delay, 0s);
+}
+
+.reveal-up.is-in,
+.reveal-fade.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Headline slides up from behind an invisible edge */
+.reveal-mask {
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.reveal-mask > * {
+  transform: translateY(110%);
+  transition: transform 1s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0s);
+}
+
+.reveal-mask.is-in > * {
+  transform: none;
+}
+
+/* Red rules and eyebrow bars draw in once revealed */
+.rule-grow,
+.reveal .eyebrow::before {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--reveal-delay, 0s) + 0.15s);
+}
+
+.is-in .rule-grow,
+.reveal.is-in .eyebrow::before {
+  transform: scaleX(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -209,7 +427,26 @@
   }
 
   .hero-rise,
-  .hero-rule {
+  .hero-rule,
+  [data-ready='true'] .hero-rise,
+  [data-ready='true'] .hero-rule,
+  .reveal-up,
+  .reveal-fade,
+  .reveal-mask > *,
+  .rule-grow,
+  .reveal .eyebrow::before {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-streak,
+  .hero-spotlight {
+    display: none;
+  }
+
+  .type-cursor::after {
     animation: none;
   }
 }
