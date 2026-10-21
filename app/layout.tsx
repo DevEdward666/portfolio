@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Edward Joseph Fernandez' }],
   creator: 'Edward Joseph Fernandez',
+  icons: {
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -68,20 +71,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="icon" href="/favicon.ico" />
-
         <link
-          href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="dark bg-background text-text-primary font-body" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-        {children}
-      </body>
+      <body className="bg-paper font-body text-ink">{children}</body>
     </html>
   )
 }

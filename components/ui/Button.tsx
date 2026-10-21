@@ -9,34 +9,26 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = 'primary', size = 'md', loading, children, className, disabled, ...props }, ref) => {
-    const base = 'relative inline-flex items-center justify-center gap-2 font-medium transition-all duration-300 active:scale-95 overflow-hidden rounded-xl'
+    const base =
+      'inline-flex items-center justify-center gap-2 font-bold uppercase tracking-caps transition-colors duration-200'
 
     const variants = {
-      primary:
-        'text-white hover:opacity-90',
-      secondary:
-        'border border-surface-border text-text-primary hover:bg-white/5 hover:border-white/20',
-      ghost:
-        'text-text-secondary hover:text-text-primary hover:bg-white/5',
+      primary: 'bg-rosso text-white hover:bg-ink',
+      secondary: 'border border-ink text-ink hover:bg-ink hover:text-white',
+      ghost: 'text-ink hover:text-rosso',
     }
 
     const sizes = {
-      sm: 'text-xs px-4 py-2',
-      md: 'text-sm px-6 py-3',
-      lg: 'text-base px-8 py-4',
+      sm: 'min-h-[40px] px-5 text-xs',
+      md: 'min-h-[52px] px-8 text-[13px]',
+      lg: 'min-h-[60px] px-10 text-sm',
     }
-
-    const primaryStyle =
-      variant === 'primary'
-        ? { background: 'linear-gradient(135deg, #4F8EF7 0%, #7B6BD4 100%)' }
-        : {}
 
     return (
       <button
         ref={ref}
         disabled={disabled || loading}
-        style={primaryStyle}
-        className={cn(base, variants[variant], sizes[size], disabled && 'opacity-50 cursor-not-allowed', className)}
+        className={cn(base, variants[variant], sizes[size], disabled && 'cursor-not-allowed opacity-50', className)}
         {...props}
       >
         {loading ? (
@@ -48,12 +40,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             Loading...
           </span>
         ) : (
-          <>
-            {children}
-            {variant === 'primary' && (
-              <span className="absolute inset-0 translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
-            )}
-          </>
+          children
         )}
       </button>
     )

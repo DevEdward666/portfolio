@@ -34,7 +34,7 @@ export default async function HomePage() {
   }));
 
   return (
-    <main className="min-h-screen bg-background overflow-x-hidden">
+    <main className="min-h-screen overflow-x-hidden">
       <Navbar />
       <HeroSection user={user} experiences={experiences} projects={projects} />
       <BackgroundSection education={education} certifications={certifications} />
